@@ -1,0 +1,14 @@
+{
+	"id": "TOGADeckSkins",
+	"name": "TOGA's Deck Skins",
+	"author": ["TheOneGoofAli"],
+	"description": "Just the additional skins for playing cards.",
+	"prefix": "toga",
+	"main_file": "deckskin.lua",
+	"priority": 0,
+	"badge_colour": "fd9712",
+	"version": "1.0.0",
+	"dependencies": ["Steamodded (>=1.*)"],
+	"conflicts": ["TOGAPack (>=0.9~*)"],
+	"allow_redistribution": true
+}
