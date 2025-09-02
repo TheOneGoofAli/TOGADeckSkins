@@ -2,6 +2,9 @@ sendInfoMessage("Loading Deckskins...", "TOGADeckSkins")
 
 SMODS.Atlas{key = "modicon", path = "togaicon.png", px = 32, py = 32}
 
+-- Check for Bunco's presence...
+local buncoload = next(SMODS.find_mod('Bunco'))
+
 -- Vanilla suites, displayed ranks and ranks to replace.
 local suits = {'Hearts', 'Clubs', 'Diamonds', 'Spades'}
 local dranks = {'Jack', 'Queen', "King", "Ace"}
@@ -48,4 +51,26 @@ for i, suit in ipairs(suits) do
 	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['toga_modern_'..suit], {key = 'toga_modern_hearts', ranks = ranks, display_ranks = dranks, atlas = mhearts.key,})
 	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['toga_modern_'..suit], {key = 'toga_modern_seasons', ranks = ranks, display_ranks = dranks, atlas = mseason.key,})
 	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['toga_modern_'..suit], {key = 'toga_modern_largeprint', ranks = ranks, display_ranks = dranks, atlas = mlargep.key,})
+end
+
+-- + Bunco suits.
+local buncosuits = buncoload and {'bunc_Fleurons', 'bunc_Halberds'}
+local rbuncolc = buncoload and SMODS.Atlas{key = 'TOGABuncoExoticLC', path = 'togaoldschoolcardsbunco_lc.png', px = 71, py = 95, disable_mipmap = true}
+local rbuncohc = buncoload and SMODS.Atlas{key = 'TOGABuncoExoticHC', path = 'togaoldschoolcardsbunco_hc.png', px = 71, py = 95, disable_mipmap = true}
+
+-- Initialize Bunco suits if present.
+if buncoload then
+	for i, suit in ipairs(buncosuits) do
+		-- Classic cards.
+		SMODS.DeckSkin {
+			key = "oldschool_"..suit,
+			suit = suit,
+			loc_txt = {
+				['default'] = "Classic Windows Cards"
+			},
+			palettes = {},
+		}
+		SMODS.DeckSkin.add_palette(SMODS.DeckSkins['toga_oldschool_'..suit], {key = 'toga_oldschool_lc', ranks = ranks, display_ranks = dranks, atlas = rbuncolc.key,})
+		SMODS.DeckSkin.add_palette(SMODS.DeckSkins['toga_oldschool_'..suit], {key = 'toga_oldschool_hc', ranks = ranks, display_ranks = dranks, atlas = rbuncohc.key,})
+	end
 end
